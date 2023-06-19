@@ -1,0 +1,11 @@
+Package: REGRESIONLinMul
+Type: Package
+Title: REGRESÓN LINEAL MULTIPLE
+Version: 0.1.0
+Author: Mateo Juarez Tlaseca
+Maintainer: The package maintainer <mateo.jrz3040@gmail.com>
+Description: Realiza el calculo de regresion lineal multiple de variables numericas, ademas de que da valores como minimos,maximos,R2, R ajustada y error estandar.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3

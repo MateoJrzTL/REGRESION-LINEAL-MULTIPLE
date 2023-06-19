@@ -1,0 +1,23 @@
+library(openxlsx)
+DF <- Entrene_R
+DF2 <- Datos_para_redicciones
+
+library(REGRESIONLinMul)
+Regresion_Lineal_M(DF,DF$calificación)
+ajuste <- Regresion_Lineal_M(DF1,DF1$calificación)
+ajuste
+
+y1<- DF[,1]-min(DF[,1]) / max(DF[,1]) - min(DF[,1])
+X12 <- DF[,2]-min(DF[,2]) / max(DF[,2]) - min(DF[,2])
+X13 <- DF[,3]-min(DF[,3]) / max(DF[,3]) - min(DF[,3])
+
+
+X1_ <- DF2[,1]-min(DF2[,1]) / max(DF2[,1]) - min(DF2[,1])
+X2_ <- DF2[,2]-min(DF2[,2]) / max(DF2[,2]) - min(DF2[,2])
+
+DF1 <- data.frame(y1,X12,X13)
+D<-data.frame(X1_,X2_)
+
+
+predicción(DF2,ajuste)
+predicción(D,ajuste)

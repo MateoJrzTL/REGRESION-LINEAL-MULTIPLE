@@ -1,0 +1,39 @@
+
+
+
+comp_medias <- comp_medias <- function(data) {
+  # denotar losgrupos
+  grupo1<-df$`Grupo 1`
+  print(grupo1)
+  grupo2<-df$`Grupo 2`
+  print(grupo2)
+  
+  
+  # Cálculo de la media de cada grupo
+  media_grupo1 <- mean(df$`Grupo 1`)
+  media_grupo2 <- mean(df$`Grupo 2`)
+  
+  # Cálculo de la desviación estándar de cada grupo
+  desviacion_grupo1 <- sd(df$`Grupo 1`)
+  desviacion_grupo2 <- sd(df$`Grupo 2`)
+  
+  # Cálculo de la varianza combinada (pooled variance)
+  varianza_combinada <- ((length(grupo1) - 1) * desviacion_grupo1^2 + (length(grupo2) - 1) * desviacion_grupo2^2) / (length(grupo1) + length(grupo2) - 2)
+  
+  # Cálculo de la estadística t
+  estadistica_t <- (media_grupo1 - media_grupo2) / sqrt(varianza_combinada * (1/length(grupo1) + 1/length(grupo2)))
+  
+  # Cálculo de los grados de libertad
+  grados_libertad <- length(grupo1) + length(grupo2) - 2
+  
+  # Crear un vector con los resultados
+  resultados <- c(media_grupo1 = media_grupo1, media_grupo2 = media_grupo2, 
+                  desviacion_grupo1 = desviacion_grupo1, desviacion_grupo2 = desviacion_grupo2, 
+                  varianza_combinada = varianza_combinada, estadistica_t = estadistica_t, 
+                  grados_libertad = grados_libertad)
+  
+  return(resultados)
+}
+exists("grupo1")
+
+comp_medias(df,grupo1)
