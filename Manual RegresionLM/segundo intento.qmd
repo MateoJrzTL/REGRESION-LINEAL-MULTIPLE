@@ -1,0 +1,98 @@
+---
+title: "Manual para Regresión Lineal Multiple"
+format: pdf
+author: Mateo Juárez Tlaseca 
+output:
+  header-includes:
+  - \usepackage[spanish]{babel}
+editor: visual
+---
+
+## Introducción
+
+Este es un código programado con el fin de calcular una regresión lineal multiple de variables cuantitativas. El código se hizo sin ocupar la fórmula que ya está dentro de Rstudio, el fin para este trabajo es aprender hacer paquetes en R [@DocumentacionIBM].
+
+Un modelo de regresión lineal múltiple es un modelo estadístico versátil para evaluar las relaciones entre un destino continuo y los predictores. Los predictores en esta función solo pueden tomar valores cuantitativos. El modelo es lineal porque consiste en términos de aditivos en los que cada término es un predictor que se multiplica por un coeficiente estimado. El término de constante (intercepción) también se añade normalmente al modelo. La regresión lineal se utiliza para generar conocimientos para los gráficos que contienen al menos dos campos continuos con uno identificado como el destino y el otro como un predictor [@AbuinJR2007].
+
+## Objetivos 
+1. Crear un paquete que permita el calculo de la regresión lineal multiple. 
+2. Enseñar a usar el codigo o la funcion programada para poder hacer el
+3. Hcer predicciones con la segunda función del pauqete 
+
+## Como instalar el pauqete 
+primero debes de descargarlo desde Github y posterior cargar la lbreria para poder acceder a las funciones 
+
+```{r}
+#devtools::install_github("MateoJrzTL/REGRESION-LINEAL-MULTIPLE")
+library(REGRESIONLinMul)
+```
+
+## Como usar el paquete 
+antes que todo debes cargar tu base de datos y asignarle un nombre
+
+```{r}
+library(readxl)
+Entrene_R <- read_excel("C:/Users/Mateo/Desktop/RLM/Entrene R.xlsx")
+DF <- Entrene_R
+print(DF)
+```
+
+una vez que tengas tus datos y libreria abierta procedemos a llamar la funcion y asignarle valores
+
+X = DF (Es tu base de datos en este caso la base de datos se llama DF)
+
+Y = Es un subseting de la variable respuesta, es este caso es igual a DF$calificacion
+
+```{r}
+Regresion_Lineal_M(DF,DF$calificación)
+```
+
+## Interpretacion de los datos 
+Una vez obtenidos los datos tenemos que intercepto son los coeficientes de regresión lo que nos ayudara a formar la formula de regresion linela multiple que en este caso queda de la siguiente manera. 
+
+```{r}
+ 
+#y = 70.4143 + 0.3444X1 - 2.3237x2
+```
+Se interpreta de la manera siguiente. La calificacion final (y) es igual a 70.4143 cuando las variables x1 y x2 se mantienen constantes, y por otra parte la calificacion aumneta 0.3444 unidades de la calificacion final por cada punto de calificacion del examen, mientras que por cada clase perdida la calificacion disminuye en 2.3237 unidades de la calificacion final. 
+
+## Función 2
+# Predicciones 
+Tenemos que cargar una nueva base de datos, que contengan las x1 y x2
+para este caso trabajaremos con la funcion de prediccion:
+
+esta en funcion de:
+Xnew <- a los nuevos datos de los cuales buscamos predecir.
+ajuste <- son los resultados que ubtuvimos en la primer función.
+
+```{r}
+#susponiendo que nombramos a los resultados de la funcion como ajuste:
+
+ajuste <- Regresion_Lineal_M(DF,DF$calificación)
+
+#importamos nuestros datos
+
+library(readxl)
+Datos_para_redicciones<-read_excel("C:/Users/Mateo/Desktop/ProbandoPaquete/Datos para redicciones.xlsx")
+DF2 <- Datos_para_redicciones
+print(DF2)
+
+#ejecutamos la funcion 
+
+predicción(DF2,ajuste)
+
+```
+
+## Conclusion 
+
+con este paquete podemos calcular el modelo de la regresion lineal multiple asi como poder predecir valores, aparte de eso obtendremos valores que obtenemos si utilizamos el comando de summary, todo esto para que puedas interpretar de una manera eficaz tu modelo y hacer unas buenas predicciones. 
+
+## Bibliografia 
+
+Abuín, J. R. (2007). Regresión lineal múltiple. IdEyGdM-Ld Estadística, Editor, 32.
+
+Estatólogos. (2021). Regresión lineal múltiple a mano (paso a paso). Estatólogos . https://statologos.com/regresion-lineal-multiple-a-mano/
+
+Documentación IBM . (Dakota del Norte). https://www.ibm.com/docs/es/cognos-analytics/11.1.0?topic=tests-multiple-linear-regression
+
+Profesor Óscar Luis. (2021, 23 de noviembre). REGRESIÓN LINEAL MÚLTIPLE | EJERCICIO RESUELTO [Video]. YouTube. https://www.youtube.com/watch?v=ZmNDRnmYaPc
